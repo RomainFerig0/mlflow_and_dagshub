@@ -25,7 +25,7 @@ jobs:
           MLFLOW_TRACKING_URI: https://dagshub.com/arthur-gtgn/mlflow-with-daghub.mlflow
         run: |
           mkdir -p models/random_forest_model
-          mlflow artifacts download \
+          python -m mlflow artifacts download \
             --run-id 6d51f11b4c424225a85ecd5421af0f41 \
             --artifact-path random_forest_model_2 \
             --dst-path models/random_forest_model
