@@ -15,17 +15,18 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python & install MLflow
-        run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          pip install mlflow
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install MLflow CLI
+        run: pip install mlflow
 
       - name: Download model artifact from DagsHub
         env:
           MLFLOW_TRACKING_URI: https://dagshub.com/arthur-gtgn/mlflow-with-daghub.mlflow
         run: |
           mkdir -p models/random_forest_model
-          python -m mlflow artifacts download \
+          mlflow artifacts download \
             --run-id 6d51f11b4c424225a85ecd5421af0f41 \
             --artifact-path random_forest_model_2 \
             --dst-path models/random_forest_model
