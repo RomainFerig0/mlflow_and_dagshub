@@ -1,0 +1,40 @@
+name: Build & Publish Docker Image
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0       # needed for DVC history
+
+      - name: Set up DVC & pull model
+        run: |
+          pip install dvc[azure]            # adjust for your remote
+          dvc pull -r storage
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t arthur03/mlops:${{ github.sha }} .
+
+      - name: Push to DockerHub
+        run: |
+          docker push arthur03/mlops-repo:${{ github.sha }}
+
+      - name: Test container health
+        run: |
+          docker run -d --name test -p 8000:8000 arthur03/mlops:${{ github.sha }}
+          sleep 5
+          curl -f http://localhost:8000/predict?x=1.23
