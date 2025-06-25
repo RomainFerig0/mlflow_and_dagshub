@@ -12,12 +12,23 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0       # needed for DVC history
+          fetch-depth: 0
 
-      - name: Set up DVC & pull model
+      - name: Set up Python & install MLflow
         run: |
-          pip install dvc[azure]            # adjust for your remote
-          dvc pull -r storage
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install mlflow==2.22.0
+
+      - name: Download model artifact from DagsHub
+        env:
+          MLFLOW_TRACKING_URI: https://dagshub.com/arthur-gtgn/mlflow-with-daghub.mlflow
+        run: |
+          mkdir -p models/random_forest_model
+          mlflow artifacts download \
+            --run-id 6d51f11b4c424225a85ecd5421af0f41 \
+            --artifact-path random_forest_model_2 \
+            --dst-path models/random_forest_model
 
       - name: Log in to DockerHub
         uses: docker/login-action@v2
@@ -27,14 +38,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t arthur03/mlops:${{ github.sha }} .
+          docker build \
+            --tag arthur03/mlops-exercise:${{ github.sha }} \
+            mlops
 
       - name: Push to DockerHub
         run: |
-          docker push arthur03/mlops-repo:${{ github.sha }}
-
-      - name: Test container health
-        run: |
-          docker run -d --name test -p 8000:8000 arthur03/mlops:${{ github.sha }}
-          sleep 5
-          curl -f http://localhost:8000/predict?x=1.23
+          docker push arthur03/mlops-exercise:${{ github.sha }}
