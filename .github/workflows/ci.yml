@@ -26,9 +26,8 @@ jobs:
           MLFLOW_TRACKING_URI: https://dagshub.com/arthur-gtgn/mlflow-with-daghub.mlflow
         run: |
           mkdir -p models/random_forest_model
-          mlflow artifacts download \
-            --run-id 48e8413cd9ff4bdaa456248f34ca7df8 \
-            --artifact-path random_forest_model_2 \
+          mlflow models download \
+            --model-uri "models:/random_forest_model/Production" \
             --dst-path models/random_forest_model
 
       - name: Log in to DockerHub
