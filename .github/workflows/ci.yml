@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir -p models/random_forest_model
           mlflow models download \
-            --model-uri "models:/random_forest_model/Production" \
+            --run-id "48e8413cd9ff4bdaa456248f34ca7df8"\
             --dst-path models/random_forest_model
 
       - name: Log in to DockerHub
