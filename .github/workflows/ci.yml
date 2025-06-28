@@ -28,7 +28,7 @@ jobs:
           mkdir -p models/random_forest_model
           mlflow artifacts download \
             --run-id 6d51f11b4c424225a85ecd5421af0f41 \
-            --artifact-path random_forest_model_2 \
+            --artifact-path mlflow-artifacts:/bf4f68aaa2de46d3b630ae933aa3aad0/48e8413cd9ff4bdaa456248f34ca7df8/artifacts/random_forest_model_2/model.pkl \
             --dst-path models/random_forest_model
 
       - name: Log in to DockerHub
