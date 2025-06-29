@@ -41,7 +41,7 @@ jobs:
         run: |
           docker build \
             --tag arthur03/mlops-exercise:${{ github.sha }} \
-            mlops
+            .
 
       - name: Push to DockerHub
         run: |
