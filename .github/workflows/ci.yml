@@ -28,7 +28,7 @@ jobs:
         run: |
           mkdir -p models/random_forest_model
           mlflow artifacts download \
-            --run-id 920f98cd99cc46909114a50fa7b360f4 \
+            --run-id 88ab2cd46252436ca0baa4c2e39f6932 \
             --artifact-path model.joblib \
             --dst-path models/random_forest_model
 
