@@ -25,8 +25,9 @@ jobs:
       - name: Download model artifact from DagsHub
         env:
           MLFLOW_TRACKING_URI: https://dagshub.com/RomainFerig0/mlops_tp1.mlflow
-        run: |
+        run: 
           mkdir -p models/random_forest_model
+          MLFLOW_TRACKING_URI=https://dagshub.com/RomainFerig0/mlops_tp1.mlflow \
           mlflow artifacts download \
             --run-id 88ab2cd46252436ca0baa4c2e39f6932 \
             --artifact-path model.joblib \
