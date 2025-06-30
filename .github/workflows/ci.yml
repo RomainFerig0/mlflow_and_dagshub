@@ -24,7 +24,7 @@ jobs:
 
       - name: Download model artifact from DagsHub
         env:
-          MLFLOW_TRACKING_URI: https://dagshub.com/RomainFerig0/dvc.mlflow
+          MLFLOW_TRACKING_URI: https://dagshub.com/RomainFerig0/mlops_tp1.mlflow
         run: |
           mkdir -p models/random_forest_model
           mlflow artifacts download \
@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t mrwnbnslm/dv2:latest .
+        run: docker build -t RomainFerig0/dv2:latest .
 
       - name: Push to DockerHub
         run: docker push RomainFerig0/dv2:latest

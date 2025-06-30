@@ -45,7 +45,7 @@ data = load_digits()
 X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
 
 # Set MLflow experiment name. This will get created if it doesn't exist
-experiment_name = "RandomForestExperiment_2"
+experiment_name = "RandomForestExperiment_RF"
 mlflow.set_experiment(experiment_name)
 
 # Define a function to train a model, log parameters and metrics to MLflow
@@ -79,4 +79,3 @@ train_and_log_model(n_estimators=100, max_depth=10)
 print("\nTo view the results, run the following command in your terminal:")
 print("mlflow ui")
 print("Then navigate to http://127.0.0.1:5000 to explore the experiment results.")
-
