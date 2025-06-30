@@ -42,6 +42,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t romar1n/mlflow:latest .
 
-      - name: Push to DockerHub
-        run: 
-            docker tag romar1n/mlflow:latest romar1n/mlflow:latest && docker push papel/romar1n/mlflow:latest
+      - name: Tag and push to DockerHub
+        run: |
+          docker tag romar1n/mlflow:latest papel/romar1n/mlflow:latest
+          docker push papel/romar1n/mlflow:latest
