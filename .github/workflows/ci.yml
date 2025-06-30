@@ -40,7 +40,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t RomainFerig0/dv2:latest .
+        run: docker build -t RomainFerig0/mlflow:latest .
 
       - name: Push to DockerHub
-        run: docker push RomainFerig0/dv2:latest
+        run: docker push RomainFerig0/mlflow:latest
