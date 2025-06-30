@@ -43,4 +43,6 @@ jobs:
         run: docker build -t RomainFerig0/mlflow:latest .
 
       - name: Push to DockerHub
-        run: docker push RomainFerig0/mlflow:latest
+        run: 
+            docker tag mlflow:latest romainferig0/mlflow:latest
+            docker push RomainFerig0/mlflow:latest
