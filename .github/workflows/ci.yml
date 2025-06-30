@@ -44,4 +44,4 @@ jobs:
 
       - name: Push to DockerHub
         run: 
-            docker tag mlflow:latest romar1n/mlflow:latest && docker push romar1n/mlflow:latest
+            docker tag romar1n/mlflow:latest romar1n/mlflow:latest && docker push papel/romar1n/mlflow:latest
