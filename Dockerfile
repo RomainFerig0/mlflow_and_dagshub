@@ -7,7 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ ./src/
 
-COPY models/random_forest_model/random_forest_model_2/model.pkl ./models/random_forest_model/random_forest_model_2/
+COPY models/random_forest_model/model.joblib ./models/random_forest_model/
 
 EXPOSE 8000
 

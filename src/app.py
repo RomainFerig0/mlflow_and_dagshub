@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 import pickle
+import joblib
 import pandas as pd
 from sklearn.datasets import load_digits
 
 app = FastAPI()
-model = pickle.load(open("models/random_forest_model/random_forest_model_2/model.pkl", "rb"))
+model = joblib.load("models/random_forest_model/model.joblib")
 
 from fastapi import Query
 
